@@ -1,0 +1,20 @@
+{
+  "name": "node-protobuf-stream",
+  "version": "0.0.1",
+  "description": "encode & decode protobuf stream",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "protobuf",
+    "stream"
+  ],
+  "author": "nigel0913",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^1.5.2",
+    "debug": "^2.2.0",
+    "protobufjs": "^5.0.1"
+  }
+}

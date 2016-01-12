@@ -1,0 +1,6 @@
+package _ProtbufStream;
+
+message Protocol {
+    required string name = 1;
+    required bytes data = 2;
+}

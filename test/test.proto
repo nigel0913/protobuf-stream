@@ -1,0 +1,5 @@
+package Test;
+
+message A {
+    required string content = 1;
+}
