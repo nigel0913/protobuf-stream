@@ -19,7 +19,7 @@ describe('MemoryFlow', function () {
         parser.on('data', function (data) {
             data.$type.fqn().should.equal('.Test.A');
             data.should.hasOwnProperty('content');
-            data.content.should.equal('hello1');
+            data.content.should.equal('hello');
             done();
         });
 
