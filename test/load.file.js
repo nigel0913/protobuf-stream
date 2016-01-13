@@ -1,7 +1,7 @@
 var path   = require('path');
 var should = require('should');
 
-var ProtobufStream = require('../lib/ProtobufStream');
+var ProtobufStream = require('../');
 
 function check() {
     var root = ProtobufStream.getProtobufNode();

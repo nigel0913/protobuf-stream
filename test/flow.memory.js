@@ -1,6 +1,6 @@
 var path           = require('path');
 var should         = require('should');
-var ProtobufStream = require('../lib/ProtobufStream');
+var ProtobufStream = require('../');
 
 describe('MemoryFlow', function () {
 
@@ -11,7 +11,7 @@ describe('MemoryFlow', function () {
         );
     });
 
-    it('#content.hello', function (done) {
+    it('#single.content', function (done) {
         var Test = ProtobufStream.getProtobufNode('Test');
         should.exist(Test);
 
@@ -33,6 +33,38 @@ describe('MemoryFlow', function () {
         });
 
         serializer.write(new Test.A({content: 'hello'}));
+    });
+
+    it('#multi.content', function (done) {
+        var Test = ProtobufStream.getProtobufNode('Test');
+        should.exist(Test);
+
+        var serializer = new ProtobufStream.Serializer();
+        var parser     = new ProtobufStream.Parser();
+
+        serializer.pipe(parser);
+
+        var count = 0;
+        var content = ['hello', 'world', 'protobuf', 'stream'];
+
+        parser.on('data', function (data) {
+            data.$type.fqn().should.equal('.Test.A');
+            data.should.hasOwnProperty('content');
+            data.content.should.equal(content[count]);
+
+            ++count;
+            if (count === content.length) return done();
+        });
+
+        parser.on('error', function (err) {
+            console.log('Error: ' + err);
+            done(err);
+        });
+
+        content.forEach(function (value) {
+            serializer.write(new Test.A({content: value}));
+        });
+
     });
 
 });
