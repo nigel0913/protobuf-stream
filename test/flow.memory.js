@@ -22,8 +22,7 @@ describe('MemoryFlow', function () {
 
         parser.on('data', function (data) {
             data.$type.fqn().should.equal('.Test.A');
-            data.should.hasOwnProperty('content');
-            data.content.should.equal('hello');
+            data.should.have.property('content', 'hello');
             done();
         });
 
@@ -49,8 +48,7 @@ describe('MemoryFlow', function () {
 
         parser.on('data', function (data) {
             data.$type.fqn().should.equal('.Test.A');
-            data.should.hasOwnProperty('content');
-            data.content.should.equal(content[count]);
+            data.should.have.property('content', content[count]);
 
             ++count;
             if (count === content.length) return done();

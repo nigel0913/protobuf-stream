@@ -1,9 +1,9 @@
-var path   = require('path');
-var net    = require('net');
+var path = require('path');
+var net  = require('net');
 
 var ProtobufStream = require('../');
 
-var opts    = {
+var opts = {
     host: 'localhost',
     port: 5050
 };

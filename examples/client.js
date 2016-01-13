@@ -4,7 +4,8 @@ var net  = require('net');
 var ProtobufStream = require('../');
 
 var content = ['hello', 'world', 'protobuf', 'stream'];
-var opts    = {
+
+var opts = {
     host: 'localhost',
     port: 5050
 };
