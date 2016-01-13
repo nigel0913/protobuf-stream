@@ -4,7 +4,7 @@
   "description": "encode & decode protobuf stream",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "make test"
   },
   "keywords": [
     "protobuf",
@@ -16,5 +16,9 @@
     "async": "^1.5.2",
     "debug": "^2.2.0",
     "protobufjs": "^5.0.1"
+  },
+  "devDependencies": {
+    "mocha": "^2.3.4",
+    "should": "^8.1.1"
   }
 }
