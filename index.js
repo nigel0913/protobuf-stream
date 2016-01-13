@@ -4,11 +4,13 @@ var Parser      = require('./lib/Parser');
 
 
 module.exports = {
-    Serializer: Serializer,
-    Parser    : Parser,
 
-    loadProto      : ProtobufMgr.loadProto,
-    clearProto     : ProtobufMgr.clearProto,
-    getProtobufNode: ProtobufMgr.getProtobufNode,
+    Serializer     : Serializer,
+    Parser         : Parser,
+    initStream     : ProtobufMgr.initStream,
+    initStream     : ProtobufMgr.initStream,
+    resetStream    : ProtobufMgr.resetStream,
+    getMessageType : ProtobufMgr.getMessageType,
     MAX_BUFFER_SIZE: ProtobufMgr.MAX_BUFFER_SIZE
+
 };

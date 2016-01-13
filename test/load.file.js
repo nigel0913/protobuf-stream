@@ -4,7 +4,7 @@ var should = require('should');
 var ProtobufStream = require('../');
 
 function check() {
-    var root = ProtobufStream.getProtobufNode();
+    var root = ProtobufStream.getMessageType();
     should.exist(root);
 
     var Test = root.Test;
@@ -19,11 +19,11 @@ describe('LoadFile', function () {
     var src = path.join(__dirname, 'protobuf.define');
 
     beforeEach(function () {
-        ProtobufStream.clearProto();
+        ProtobufStream.resetStream();
     });
 
     it('#single.proto', function (done) {
-        ProtobufStream.loadProto(
+        ProtobufStream.initStream(
             path.join(src, 'single.proto'),
             function (err) {
                 should.not.exist(err);
@@ -34,7 +34,7 @@ describe('LoadFile', function () {
     });
 
     it('#single.json', function (done) {
-        ProtobufStream.loadProto(
+        ProtobufStream.initStream(
             path.join(src, 'single.json'),
             function (err) {
                 should.not.exist(err);
@@ -45,7 +45,7 @@ describe('LoadFile', function () {
     });
 
     it('#proto-folder', function (done) {
-        ProtobufStream.loadProto(
+        ProtobufStream.initStream(
             path.join(src, 'proto'),
             function (err) {
                 should.not.exist(err);
@@ -56,7 +56,7 @@ describe('LoadFile', function () {
     });
 
     it('#json-folder', function (done) {
-        ProtobufStream.loadProto(
+        ProtobufStream.initStream(
             path.join(src, 'json'),
             function (err) {
                 should.not.exist(err);
@@ -67,7 +67,7 @@ describe('LoadFile', function () {
     });
 
     it('#mix-files', function (done) {
-        ProtobufStream.loadProto(
+        ProtobufStream.initStream(
             path.join(src, 'mix'),
             function (err) {
                 should.not.exist(err);
@@ -78,11 +78,11 @@ describe('LoadFile', function () {
     });
 
     it('#duplicate-define', function (done) {
-        ProtobufStream.loadProto(
+        ProtobufStream.initStream(
             path.join(src, './'),
             function (err) {
                 should.exist(err);
-                var root = ProtobufStream.getProtobufNode();
+                var root = ProtobufStream.getMessageType();
                 should.not.exist(root);
 
                 done();

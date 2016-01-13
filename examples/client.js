@@ -14,7 +14,7 @@ function test(done) {
     var serializer = new ProtobufStream.Serializer();
     var parser     = new ProtobufStream.Parser();
     var socket     = net.connect(opts);
-    var Test       = ProtobufStream.getProtobufNode('Test');
+    var Test       = ProtobufStream.getMessageType('Test');
     var count      = 0;
 
     socket.pipe(parser);
@@ -40,7 +40,7 @@ function test(done) {
     serializer.write(new Test.A({content: content[count]}));
 }
 
-ProtobufStream.loadProto(
+ProtobufStream.initStream(
     path.join(__dirname, '../test/protobuf.define/single.proto'),
     function () {
         test(function () {

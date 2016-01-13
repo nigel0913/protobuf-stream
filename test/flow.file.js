@@ -10,7 +10,7 @@ describe('FileFlow', function () {
     var content  = ['hello', 'world', 'protobuf', 'stream'];
 
     before(function (done) {
-        ProtobufStream.loadProto(
+        ProtobufStream.initStream(
             path.join(__dirname, 'protobuf.define/single.proto'),
             done
         );
@@ -43,7 +43,7 @@ describe('FileFlow', function () {
     }
 
     it('#write.Test.A', function (done) {
-        var Test       = ProtobufStream.getProtobufNode('Test');
+        var Test       = ProtobufStream.getMessageType('Test');
         var ws         = fs.createWriteStream(filename);
         var serializer = new ProtobufStream.Serializer();
 

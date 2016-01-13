@@ -8,10 +8,10 @@ var opts = {
     port: 5050
 };
 
-ProtobufStream.loadProto(
+ProtobufStream.initStream(
     path.join(__dirname, '../test/protobuf.define/single.proto'),
     function () {
-        var Test = ProtobufStream.getProtobufNode('Test');
+        var Test = ProtobufStream.getMessageType('Test');
 
         var server = net.createServer(function (socket) {
             var serializer = new ProtobufStream.Serializer();

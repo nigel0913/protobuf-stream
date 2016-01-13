@@ -13,10 +13,10 @@ describe('NetworkFlow', function () {
     };
 
     before(function (done) {
-        ProtobufStream.loadProto(
+        ProtobufStream.initStream(
             path.join(__dirname, 'protobuf.define/single.proto'),
             function () {
-                var Test = ProtobufStream.getProtobufNode('Test');
+                var Test = ProtobufStream.getMessageType('Test');
 
                 var server = net.createServer(function (socket) {
                     var serializer = new ProtobufStream.Serializer();
@@ -43,7 +43,7 @@ describe('NetworkFlow', function () {
         var serializer = new ProtobufStream.Serializer();
         var parser     = new ProtobufStream.Parser();
         var socket     = net.connect(opts);
-        var Test       = ProtobufStream.getProtobufNode('Test');
+        var Test       = ProtobufStream.getMessageType('Test');
         var count      = 0;
 
         socket.pipe(parser);

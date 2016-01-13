@@ -5,14 +5,14 @@ var ProtobufStream = require('../');
 describe('MemoryFlow', function () {
 
     before(function (done) {
-        ProtobufStream.loadProto(
+        ProtobufStream.initStream(
             path.join(__dirname, 'protobuf.define/single.proto'),
             done
         );
     });
 
     it('#single.content', function (done) {
-        var Test = ProtobufStream.getProtobufNode('Test');
+        var Test = ProtobufStream.getMessageType('Test');
         should.exist(Test);
 
         var serializer = new ProtobufStream.Serializer();
@@ -35,7 +35,7 @@ describe('MemoryFlow', function () {
     });
 
     it('#multi.content', function (done) {
-        var Test = ProtobufStream.getProtobufNode('Test');
+        var Test = ProtobufStream.getMessageType('Test');
         should.exist(Test);
 
         var serializer = new ProtobufStream.Serializer();
