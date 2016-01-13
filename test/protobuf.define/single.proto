@@ -1,0 +1,9 @@
+package Test;
+
+message A {
+    required string content = 1;
+}
+
+message B {
+    required uint32 id = 1;
+}

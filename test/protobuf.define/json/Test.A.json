@@ -1,0 +1,16 @@
+{
+    "package": "Test",
+    "messages": [
+        {
+            "name": "A",
+            "fields": [
+                {
+                    "rule": "required",
+                    "type": "string",
+                    "name": "content",
+                    "id": 1
+                }
+            ]
+        }
+    ]
+}

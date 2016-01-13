@@ -1,10 +1,14 @@
-var should = require('should');
+var path           = require('path');
+var should         = require('should');
 var ProtobufStream = require('../lib/ProtobufStream');
 
 describe('MemoryFlow', function () {
 
     before(function (done) {
-        ProtobufStream.loadProto(__dirname, done);
+        ProtobufStream.loadProto(
+            path.join(__dirname, 'protobuf.define/single.proto'),
+            done
+        );
     });
 
     it('#content.hello', function (done) {
@@ -12,7 +16,7 @@ describe('MemoryFlow', function () {
         should.exist(Test);
 
         var serializer = new ProtobufStream.Serializer();
-        var parser = new ProtobufStream.Parser();
+        var parser     = new ProtobufStream.Parser();
 
         serializer.pipe(parser);
 
