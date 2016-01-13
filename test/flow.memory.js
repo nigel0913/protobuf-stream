@@ -27,7 +27,12 @@ describe('MemoryFlow', function () {
         });
 
         parser.on('error', function (err) {
-            console.log('Error: ' + err);
+            console.log('parser.Error: ' + err);
+            done(err);
+        });
+
+        serializer.on('error', function (err) {
+            console.log('serializer.Error: ' + err);
             done(err);
         });
 
