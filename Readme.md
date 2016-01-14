@@ -10,10 +10,10 @@
     
 ## Usage
 
+Simple example:
+
+define.proto file
 ```
-define.proto
-
-
 package Test;
 
 message A {
@@ -22,8 +22,9 @@ message A {
 
 ```
 
-```js
+test.js file
 
+```js
 var path = require('path');
 var ProtobufStream = require('node-protobuf-stream');
 
@@ -48,10 +49,24 @@ content.forEach(function (value) {
 
 ```
 
+output
+
+```
+.Test.A {"a":1}
+.Test.A {"a":2}
+.Test.A {"a":3}
+```
+
+# API
+
 ## Options
 
 ...
 
 ## Events
+
+...
+
+## Custom Wrapper
 
 ...
