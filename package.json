@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "description": "encode & decode protobuf stream",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nigel0913/protobuf-stream.git"
+  },
   "scripts": {
     "test": "make test"
   },
