@@ -37,13 +37,11 @@ var parser     = new ProtobufStream.Parser();
 
 serializer.pipe(parser);
 
-var content = [1, 2, 3];
-
 parser.on('data', function (data) {
     console.log(data.$type.fqn(), JSON.stringify(data));
 });
 
-content.forEach(function (value) {
+[1, 2, 3].forEach(function (value) {
     serializer.write(new Test.A({a: value}));
 });
 
