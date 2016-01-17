@@ -47,16 +47,53 @@ describe('FileFlow', function () {
         var ws         = fs.createWriteStream(filename);
         var serializer = new ProtobufStream.Serializer();
 
-        serializer.pipe(ws);
+        ws.on('pipe', function (src) {
+            console.log(src instanceof ProtobufStream.Serializer);
+        });
 
         ws.on('open', function () {
             content.forEach(function (value) {
                 serializer.write(new Test.A({content: value}));
             });
             serializer.end();
-            ws.end();
+            //ws.end();
             checkFile(done);
         });
+
+        ws.on('drain', function () {
+            console.log('ws.drain');
+        });
+
+        ws.on('finish', function () {
+            console.log('ws.finish');
+        });
+
+        serializer.on('data', function (data) {
+            console.log('serializer.data');
+            console.log(JSON.stringify(data));
+        });
+
+        // Writable:
+        // When the end() method has been called, and all data has been flushed to the underlying system, this event is emitted.
+        serializer.on('finish', function () {
+            console.log('serializer.finish');
+        });
+
+        /*
+
+         Readable:
+
+         This event fires when there will be no more data to read.
+
+         Note that the 'end' event will not fire unless the data is completely consumed.
+         This can be done by switching into flowing mode, or by calling read() repeatedly until you get to the end.
+         */
+        serializer.on('end', function () {
+            console.log('serializer.end');
+        });
+
+        serializer.pipe(ws);
+
 
     });
 

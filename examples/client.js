@@ -29,7 +29,8 @@ function test(done) {
         }
 
         console.log('count=', count);
-        serializer.write(new Test.A({content: content[count]}));
+        var res = serializer.write(new Test.A({content: content[count]}));
+        console.log('res=' + res);
     });
 
     parser.on('error', function (err) {

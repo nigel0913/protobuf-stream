@@ -63,6 +63,31 @@ output
 
 ## Events
 
+### Serializer
+
+#### "error"
+
+#### "data"
+
+#### "warn"
+
+#### "finish"
+
+When the end() method has been called, and all data has been flushed to the underlying system, this event is emitted.
+
+#### "end"
+
+This event fires when there will be no more data to read.
+Note that the 'end' event will not fire unless the data is completely consumed.
+
+### Parser
+
+#### "error"
+
+#### "warn"
+
+#### "finish"
+
 ...
 
 ## Custom Wrapper
