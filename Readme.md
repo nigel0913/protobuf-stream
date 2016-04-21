@@ -93,3 +93,51 @@ Note that the 'end' event will not fire unless the data is completely consumed.
 ## Custom Wrapper
 
 ...
+
+
+# Typescript support
+
+Waiting for [Github Issues: Package scopes](https://github.com/Microsoft/TypeScript/pull/4913) to write index.d.ts.
+
+Another way: copy below to your project typings folder
+
+``` typescript
+/// <reference path="../node/node.d.ts" />
+
+declare module "node-protobuf-stream" {
+
+    import stream = require("stream");
+
+    interface Options {
+        limit_buffer_size:number;
+        header_32_bit:boolean;
+    }
+
+    interface Callback {
+        (err):void;
+    }
+
+    export class Serializer extends stream.Transform {
+        wrapMessage(message:any):Buffer;
+    }
+
+    export class Parser extends stream.Transform {
+        unwrapBuffer(message:Buffer):any;
+    }
+
+    //function setWrap():void;
+    //function setUnwrap():void;
+
+    function initStream(dirOrFile:string,
+                        options?:Options,
+                        done?:Callback):void;
+
+    function resetStream():void;
+
+    function getMessageType(pkgName?:string):any;
+
+    //function getLimitBufferSize():void;
+    //function getHeaderSize():void;
+
+}
+```
