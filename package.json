@@ -1,6 +1,6 @@
 {
   "name": "node-protobuf-stream",
-  "version": "0.1.2",
+  "version": "0.1.3-0",
   "description": "encode & decode protobuf stream",
   "main": "index.js",
   "typings": "index.d.ts",
