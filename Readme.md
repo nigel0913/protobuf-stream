@@ -8,9 +8,7 @@
 
     $ npm install node-protobuf-stream
     
-## Usage
-
-Simple example:
+## Usage Example
 
 define.proto file
 ```
@@ -30,7 +28,7 @@ var ProtobufStream = require('node-protobuf-stream');
 
 ProtobufStream.initStream(path.join(__dirname, 'define.proto'));
 
-var Test = ProtobufStream.getMessageType('Test');
+var Test = ProtobufStream.get('Test');
 
 var serializer = new ProtobufStream.Serializer();
 var parser     = new ProtobufStream.Parser();
@@ -55,47 +53,95 @@ output
 .Test.A {"a":3}
 ```
 
-# API
+## API
 
-## Options
+### initStream(`dirOrFile` [, `options`] [, `done`])
 
-...
+* `dirOrFile`: the protobuf definition file or directory (load all proto&json files recursively)
+* `options`: module options, see below.
+* `done (err)`: callback when init finished. it will be sync if not given.
+
+#### `options`
+| Property | Default | Description |
+|--------|--------|---------|
+| header_32_bit | false     | Default is 16 bit , and max buffer size is 64K |
+| header_big_endian | false | Default is little endian |
+| limit_buffer_size | 1 << 16 - 1 | Custom limit for buffer size |
+
+### resetStream()
+
+reset module data.
+
+### Serializer()
+
+return stream class instance for serializing protobuf object.
+
+### Parser()
+
+return stream class instance for parsing protobuf buffer.
+
+### get([`fqn`])
+
+get Protobuf.js module class by fqn (fully qualified name as of ".PATH.TO.THIS")
+
+
+### setCustomWrap(`serializeFn`, `parseFn`)
+
+Custom Method to serialize protobuf object to buffer & parse buffer to protobuf object.
+
+* `serializeFn(message)`: message is protobuf object, should return Buffer;
+* `parseFn(buffer)`: buffer is Buffer, should return protobuf object;
 
 ## Events
 
-### Serializer
+### Serializer Events
 
 #### "error"
+
+`serializer` will emit `error` when some error occurs.
+
+#### stream.Writable events
+
+such as
+* "finish"
+* "end"
+* "close"
+* ...
+
+### Parser Events
+
+#### "error"
+
+`parser` will emit `error` when some error occurs.
 
 #### "data"
 
-#### "warn"
+`parse` will emit `data` when one protobuf object has been parsed from buffer.
 
-#### "finish"
+#### stream.Readable events
 
-When the end() method has been called, and all data has been flushed to the underlying system, this event is emitted.
-
-#### "end"
-
-This event fires when there will be no more data to read.
-Note that the 'end' event will not fire unless the data is completely consumed.
-
-### Parser
-
-#### "error"
-
-#### "warn"
-
-#### "finish"
-
-...
+such as
+* "close"
+* "end"
+* ...
 
 ## Custom Wrapper
 
-...
+The module Wrapper:
+```protobuf
+syntax = "proto3";
+package _ProtbufStream;
+message Protocol {
+    string name = 1;
+    bytes data = 2;
+}
+```
+Serializer.wrapMessage(`message`:ProtobufObject):Buffer && Parser.unwrapBuffer(buffer):ProtobufObject
+
+You can use `setCustomWrap(serializeFn, parseFn)` api to realize custom wrapper.
 
 
-# Typescript support
+## Typescript support
 
 Waiting for [Github Issues: Package scopes](https://github.com/Microsoft/TypeScript/pull/4913) to write index.d.ts.
 
@@ -111,6 +157,7 @@ declare module "node-protobuf-stream" {
     interface Options {
         limit_buffer_size:number;
         header_32_bit:boolean;
+        header_big_endian:boolean;
     }
 
     interface Callback {
@@ -125,8 +172,7 @@ declare module "node-protobuf-stream" {
         unwrapBuffer(message:Buffer):any;
     }
 
-    //function setWrap():void;
-    //function setUnwrap():void;
+    function setCustomWrap(serializeFn, parseFn):void;
 
     function initStream(dirOrFile:string,
                         options?:Options,
@@ -134,10 +180,6 @@ declare module "node-protobuf-stream" {
 
     function resetStream():void;
 
-    function getMessageType(pkgName?:string):any;
-
-    //function getLimitBufferSize():void;
-    //function getHeaderSize():void;
-
+    function get(pkgName?:string):any;
 }
 ```

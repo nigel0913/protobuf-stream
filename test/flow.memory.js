@@ -12,7 +12,7 @@ describe('MemoryFlow', function () {
     });
 
     it('#single.content', function (done) {
-        var Test = ProtobufStream.getMessageType('Test');
+        var Test = ProtobufStream.get('Test');
         should.exist(Test);
 
         var serializer = new ProtobufStream.Serializer();
@@ -40,7 +40,7 @@ describe('MemoryFlow', function () {
     });
 
     it('#multi.content', function (done) {
-        var Test = ProtobufStream.getMessageType('Test');
+        var Test = ProtobufStream.get('Test');
         should.exist(Test);
 
         var serializer = new ProtobufStream.Serializer();

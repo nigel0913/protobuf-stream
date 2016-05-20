@@ -14,7 +14,7 @@ function test(done) {
     var serializer = new ProtobufStream.Serializer();
     var parser     = new ProtobufStream.Parser();
     var socket     = net.connect(opts);
-    var Test       = ProtobufStream.getMessageType('Test');
+    var Test       = ProtobufStream.get('Test');
     var count      = 0;
 
     socket.pipe(parser);

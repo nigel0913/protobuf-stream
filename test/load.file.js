@@ -4,7 +4,7 @@ var should = require('should');
 var ProtobufStream = require('../');
 
 function check() {
-    var root = ProtobufStream.getMessageType();
+    var root = ProtobufStream.get();
     should.exist(root);
 
     var Test = root.Test;
@@ -82,7 +82,7 @@ describe('LoadFile', function () {
             path.join(src, './'),
             function (err) {
                 should.exist(err);
-                var root = ProtobufStream.getMessageType();
+                var root = ProtobufStream.get();
                 should.not.exist(root);
 
                 done();

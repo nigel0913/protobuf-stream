@@ -43,7 +43,7 @@ describe('FileFlow', function () {
     }
 
     it('#write.Test.A', function (done) {
-        var Test       = ProtobufStream.getMessageType('Test');
+        var Test       = ProtobufStream.get('Test');
         var ws         = fs.createWriteStream(filename);
         var serializer = new ProtobufStream.Serializer();
 

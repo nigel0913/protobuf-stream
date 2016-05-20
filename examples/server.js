@@ -11,7 +11,7 @@ var opts = {
 ProtobufStream.initStream(
     path.join(__dirname, '../test/protobuf.define/single.proto'),
     function () {
-        var Test = ProtobufStream.getMessageType('Test');
+        var Test = ProtobufStream.get('Test');
 
         var server = net.createServer(function (socket) {
             var serializer = new ProtobufStream.Serializer();
